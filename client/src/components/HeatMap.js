@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import h337 from 'heatmap.js';
 
-function HeatmapPlaceholder() {
-  const style = {
-    width: '100%',
-    height: '300px',
-    border: '2px dashed #ccc',
-    borderRadius: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#999',
-    fontSize: '1rem',
-  };
+const HeatMap = ({ data, max, radius = 30, style = {} }) => {
+  const containerRef = useRef(null);
 
-  return <div style={style}>[ Heatmap Image/Data will go here. ]</div>;
-}
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-export default HeatmapPlaceholder;
-// This component serves as a placeholder for the heatmap.
-// It can be replaced with an actual heatmap component later.
+    const heatmap = h337.create({
+      container: containerRef.current,
+      radius,
+    });
+
+    heatmap.setData({ max, data });
+
+    return () => {
+      const el = containerRef.current;
+      if (el) el.innerHTML = '';
+    };
+  }, [data, max, radius]);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        ...style,
+      }}
+    />
+  );
+};
+
+export default HeatMap;
