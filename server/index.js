@@ -9,16 +9,27 @@ app.use(express.json());
 
 // fetch all clicks
 app.get('/api/heatmap', async (req, res) => {
+  const { label } = req.query;
+
+  // filter clicks by label iff provided
+  const filter = ['A', 'B'].includes(label) ? { label } : {};
   const db = await connect();
-  const clicks = await db.collection('clicks').find().toArray();
+
+  // fetch clicks with filter from the database
+  const clicks = await db.collection('clicks').find(filter).toArray();
   res.json(clicks);
 });
 
 // record a click event
 app.post('/api/click', async (req, res) => {
-  const { x, y, value, timestamp } = req.body;
+  // validate request body
+  const { x, y, value, timestamp, label } = req.body;
+  if (!['A', 'B'].includes(label)) { 
+    return res.status(400).json({ error: 'Invalid label; must be A or B' });
+  }
+  
   const db = await connect();
-  await db.collection('clicks').insertOne({ x, y, value, timestamp });
+  await db.collection('clicks').insertOne({ x, y, value, timestamp, label });
   res.sendStatus(201);
 });
 
