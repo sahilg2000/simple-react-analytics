@@ -12,7 +12,7 @@ import {
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function normalizeData(raw) {
-  // plain numbers → wrap into { name, clicks }
+  // plain numbers -> wrap into { name, clicks }
   if (Array.isArray(raw) && typeof raw[0] === 'number') {
     return DAY_NAMES.map((name, i) => ({
       name,

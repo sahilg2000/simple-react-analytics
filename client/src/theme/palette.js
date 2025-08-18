@@ -1,6 +1,6 @@
 import colors from './colors';
 
-/* Accent → main accent color */
+/* Accent -> main accent color */
 export const ACCENTS = {
   blue:   colors.blue_accent,
   red:    colors.red_accent,
@@ -8,7 +8,7 @@ export const ACCENTS = {
   orange: colors.orange_accent,
 };
 
-/* Accent → matching pale surface for LIGHT mode */
+/* Accent -> matching pale surface for LIGHT mode */
 const SURFACES_LIGHT = {
   blue:   colors.blue_background,
   red:    colors.red_background,
