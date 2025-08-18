@@ -25,7 +25,7 @@ import createPalette from './theme/palette';
 import './App.css';
 
 
-// pick accent + mode here (adjust manually when you test)
+// picks accent + mode here 
 const palette = createPalette({ accent: 'green', mode: 'dark' });
 
 
