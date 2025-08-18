@@ -18,6 +18,7 @@ import DownloadButton from './components/DownloadButton';
 import ImportJsonButton from './components/JsonImport';
 import ExportJsonButton from './components/JsonExport';
 import ModeToggle from './components/ModeToggle';
+import ColorSelector from './components/ColorSelector';
 
 import createPalette from './theme/palette';
 
@@ -61,7 +62,8 @@ function App() {
   
   // theming state
   const [mode, setMode] = useState('light');
-  const palette = createPalette({ accent: 'blue', mode });
+  const [accent, setAccent] = useState('blue');
+  const palette = createPalette({ accent, mode });
 
   useEffect(fetchHeatmap, [label]);     // run on mount and when label changes
 
@@ -78,6 +80,12 @@ function App() {
           onToggle={(v) => setMode(v ? 'dark' : 'light')}
           accent={palette.accent}
           light = {palette.background}
+        />
+        
+        <ColorSelector
+          accent={accent}
+          onChange={setAccent}
+          palette={palette}
         />
         
         {/* A/B switcher */}

@@ -36,7 +36,7 @@ export default function ModeToggle({ isDark, onToggle, accent, light }) {
 
   return (
     <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}>
-      <span style={{ marginBottom: 4, fontSize: 12 }}>
+      <span style={{ marginBottom: 10, fontSize: 12 }}>
         {isDark ? 'Dark Mode' : 'Light Mode'}
       </span>
       <div
