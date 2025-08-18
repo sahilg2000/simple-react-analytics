@@ -94,6 +94,7 @@ npm start
 
 - API -> http://localhost:4000  
 - Dashboard -> http://localhost:3000 (React dev server default)  
+- Testing Click captures -> Open '/capture-lib/test.html' in your browser
 
 ---
 
@@ -142,6 +143,9 @@ Payload must include:
 ---
 
 ## Capture Scripts
+
+Run the 'capture-lib/test.html' for testing purposes. 
+For other/custom websites and regular use, see use cases below.
 
 ### Click-only
 
