@@ -23,13 +23,13 @@ app.get('/api/heatmap', async (req, res) => {
 // record a click event
 app.post('/api/click', async (req, res) => {
   // validate request body
-  const { x, y, value, timestamp, label } = req.body;
+  const { x, y, value, timestamp, label, sessionId } = req.body;
   if (!['A', 'B'].includes(label)) { 
     return res.status(400).json({ error: 'Invalid label; must be A or B' });
   }
   
   const db = await connect();
-  await db.collection('clicks').insertOne({ x, y, value, timestamp, label });
+  await db.collection('clicks').insertOne({ x, y, value, timestamp, label, sessionId });
   res.sendStatus(201);
 });
 

@@ -11,13 +11,21 @@
     window.__SRA_CONFIG_API_BASE_URL || 'http://localhost:4000'
 
   // variant (A or B); page owner sets this before loading the script
-  const LABEL = window.__SRA_CONFIG_LABEL || 'A'
-
+  const LABEL = window.__SRA_CONFIG_LABEL || 'B'
+  
+  // one session per tab until it’s closed
+  let SESSION_ID = sessionStorage.getItem('sraSessionId');
+  if (!SESSION_ID) {
+    SESSION_ID = crypto.randomUUID();
+    // store it in sessionStorage so it persists across reloads
+    // but not across tabs or browser sessions
+    sessionStorage.setItem('sraSessionId', SESSION_ID);
+  }
   // Handler for click events
   function handleClick(e) {
-    // get coordinates relative to viewport
-    const x = e.clientX
-    const y = e.clientY
+    // get coordinates relative to the full document
+    const x = e.pageX
+    const y = e.pageY
 
     // build payload
     const payload = {
@@ -25,7 +33,8 @@
       y,
       value: 1,
       timestamp: new Date().toISOString(),
-      label: LABEL
+      label: LABEL,
+      sessionId: SESSION_ID,      
     }
 
     // fire-and-forget POST
@@ -42,7 +51,6 @@
   // Attach the listener as soon as the script loads
   document.addEventListener('click', handleClick)
 })()
-
 
 /**
  * USAGE
@@ -62,7 +70,8 @@
  *
  * 2.  Clicks on the page will be POSTed to:
  *         {API_BASE_URL}/api/click
- *     with a JSON payload: { x, y, value, timestamp, label }.
+ *     with a JSON payload:
+ *         { x, y, value, timestamp, label, sessionId }.
  *
  * 3.  To track the B variant, change only `__SRA_CONFIG_LABEL` to 'B'.
  */

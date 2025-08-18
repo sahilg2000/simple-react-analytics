@@ -1,8 +1,10 @@
+// components/Section.js
 import React from 'react';
 
-function Section({ title, background = '#f5f5f5', children }) {
+function Section({ title, background, textColor, children }) {
   const style = {
     background,
+    color: textColor,
     padding: '1rem',
     marginBottom: '1.5rem',
     borderRadius: '8px',

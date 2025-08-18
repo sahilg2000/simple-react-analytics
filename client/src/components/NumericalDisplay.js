@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NumericalDisplay({ label, value, backgroundColor = '#ffffff', textColor = '#000000', size = 100, bordered = false }) {
+function NumericalDisplay({ label, value, backgroundColor, textColor, size = 100, bordered = false }) {
   const style = {
     backgroundColor,
     color: textColor,

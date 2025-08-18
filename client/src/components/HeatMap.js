@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import h337 from 'heatmap.js';
 
-const HeatMap = ({ data, max, radius = 30, style = {} }) => {
+const HeatMap = ({ data, max, radius = 30, pageHeight, style = {} }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -11,7 +11,8 @@ const HeatMap = ({ data, max, radius = 30, style = {} }) => {
       container: containerRef.current,
       radius,
     });
-
+    // expose the instance for the Download button
+    window.__SRA_HEATMAP = heatmap;
     heatmap.setData({ max, data });
 
     return () => {
@@ -28,7 +29,7 @@ const HeatMap = ({ data, max, radius = 30, style = {} }) => {
         top: 0,
         left: 0,
         width: '100%',
-        height: '100%',
+        height: pageHeight,
         ...style,
       }}
     />

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Capture-lib Test</title>
+
+  <!-- tell the scripts where to send data and what label to use -->
+  <script>
+    window.__SRA_CONFIG_API_BASE_URL = 'http://localhost:4000';
+    window.__SRA_CONFIG_LABEL = 'B';           /* or 'B' */
+  </script>
+
+  <!-- click + hover/move capture (order doesn’t matter) -->
+  <script src="./capture-click.js"></script>
+  <script src="./capture-linger.js"></script>
+
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; max-width: 720px; margin: 2rem auto; }
+    p { margin: 0 0 1rem; }
+    span.idx { font-weight: bold; margin-right: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<h1>Scroll / Hover / Click around</h1>
+
+<!-- 50 numbered lorem paragraphs -->
+<script>
+  const container = document.body;
+  for (let i = 1; i <= 500; i++) {
+    const p = document.createElement('p');
+    p.innerHTML =
+      `<span class="idx">${i}.</span>` +
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum.';
+    container.appendChild(p);
+  }
+</script>
+
+</body>
+</html>

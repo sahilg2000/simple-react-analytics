@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header({ text, backgroundColor = '#222', textColor = '#fff' }) {
+function Header({ text, backgroundColor, textColor }) {
   const style = {
     backgroundColor,
     color: textColor,
